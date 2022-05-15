@@ -1,2 +1,4 @@
 SECRET_KEY = 'dev'
-DATABASE = 'instance/myappdb.sqlite3'
+SQLALCHEMY_DATABASE_URI='sqlite:///myappdb.sqlite3'
+
+SQLALCHEMY_TRACK_MODIFICATIONS=False

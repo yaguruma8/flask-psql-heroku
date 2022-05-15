@@ -1,7 +1,5 @@
-import os
-import sqlite3
-
-from flask import Flask, render_template, current_app, g
+from flask import Flask, render_template
+from myapp.db import db, Entry
 
 
 def create_app(test_config=None):
@@ -13,9 +11,12 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
+    # dbの初期化
+    db.init_app(app)
+
     @app.route('/')
     def hello_world():
-        entries = get_db().execute('SELECT * FROM entries;').fetchall()
+        entries = Entry.query.all()
         return render_template('index.html', entries=entries)
 
     return app
@@ -23,22 +24,3 @@ def create_app(test_config=None):
 
 # gunicornで呼び出すアプリケーションをappに代入
 app = create_app()
-
-
-# database
-def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
-    return g.db
-
-
-@app.teardown_appcontext
-def close_db(err=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
