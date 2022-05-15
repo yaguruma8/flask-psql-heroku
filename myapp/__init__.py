@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from myapp.db import db, Entry
 
 
@@ -18,6 +18,15 @@ def create_app(test_config=None):
     def hello_world():
         entries = Entry.query.all()
         return render_template('index.html', entries=entries)
+
+    @app.post('/post')
+    def add_entry():
+        entry = Entry()
+        entry.title = request.form['title']
+        entry.body = request.form['body']
+        db.session.add(entry)
+        db.session.commit()
+        return redirect(url_for('hello_world'))
 
     return app
 
