@@ -4,6 +4,14 @@
   <title>Hello World</title>
 </head>
 <body>
-  <h1>Hello World, {{ name }}!</h1>
+  <h1>Hello World!</h1>
+  <ul>
+  {% for entry in entries %}
+  <li>
+    <p>{{ entry.title }}</p>
+    <p>{{ entry.body }}</p>
+  </li>
+  {% endfor %}
+  </ul>
 </body>
 </html>
