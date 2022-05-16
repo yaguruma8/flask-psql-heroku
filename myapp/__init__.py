@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from myapp.db import db, Entry
+from myapp.db import db, Entry, create_init
 
 
 def create_app(test_config=None):
@@ -31,5 +31,4 @@ def create_app(test_config=None):
     return app
 
 
-# gunicornで呼び出すアプリケーションをappに代入
 app = create_app()

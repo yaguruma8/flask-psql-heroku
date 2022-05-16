@@ -13,3 +13,9 @@ class Entry(db.Model):
 
     def __repr__(self) -> str:
         return '<Entry %r>' % self.title
+
+
+def create_init(app):
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
