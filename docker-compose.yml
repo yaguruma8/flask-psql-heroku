@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgresql:
+    container_name: mypostgres
+    build: ./postgresql
+    ports:
+      - 5432:5432
+    environment:
+      # ユーザー名は設定しない場合はpostgres
+      POSTGRES_PASSWORD: pass
+    restart: always
