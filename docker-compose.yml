@@ -5,8 +5,14 @@ services:
     container_name: mypostgres
     build: ./postgresql
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       # ユーザー名は設定しない場合はpostgres
       POSTGRES_PASSWORD: pass
     restart: always
+    # 追加
+    volumes:
+      - type: bind
+        source: ./postgresql/init
+        target: /docker-entrypoint-initdb.d
+
