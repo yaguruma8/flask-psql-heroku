@@ -1,3 +1,6 @@
+import click
+
+from flask.cli import with_appcontext
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -15,7 +18,10 @@ class Entry(db.Model):
         return '<Entry %r>' % self.title
 
 
-def create_init(app):
-    with app.app_context():
-        db.drop_all()
-        db.create_all()
+@click.command('init-database')
+@with_appcontext
+def create_init():
+    db.drop_all()
+    db.create_all()
+    
+    click.echo('Initialized the Database.')

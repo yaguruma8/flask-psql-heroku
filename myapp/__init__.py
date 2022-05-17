@@ -28,6 +28,8 @@ def create_app(test_config=None):
         db.session.commit()
         return redirect(url_for('hello_world'))
 
+    app.cli.add_command(create_init)
+
     return app
 
 
