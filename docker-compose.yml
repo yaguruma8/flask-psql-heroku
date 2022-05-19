@@ -8,7 +8,7 @@ services:
       - "5432:5432"
     environment:
       # ユーザー名は設定しない場合はpostgres
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     restart: always
     # 追加
     volumes:
