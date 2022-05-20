@@ -9,5 +9,6 @@ local_uri = 'postgresql://{user}:{pass}@{host}/{dbname}'.format(**{
     'host': os.getenv('DB_HOST', 'localhost'),
     'dbname': os.getenv('DB_NAME'),
 })
-SQLALCHEMY_DATABASE_URI = local_uri
+heroku_db_uri = os.getenv('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI = heroku_db_uri or local_uri
 SQLALCHEMY_TRACK_MODIFICATIONS = False
