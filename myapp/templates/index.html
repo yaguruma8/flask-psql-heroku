@@ -9,15 +9,17 @@
   {% for entry in entries %}
   <li>
     <p>{{ entry.title }}</p>
-    <p>{{ entry.body }}</p>
+    <p>{{ entry.body | markdown }}</p>
   </li>
   {% endfor %}
   </ul>
   <form method="post" action="/post">
-    <label for="title">Title</label>
-    <input name="title" id="title">
+    <p>
+      <label for="title">Title</label>
+      <input name="title" id="title">
+    </p>
     <label for="body">Body</label>
-    <input name="body" id="body">
+    <textarea name="body" id="body" rows="3"></textarea>
     <button type="submit">Post</button>
   </form>
 </body>

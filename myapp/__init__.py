@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flaskext.markdown import Markdown
+
+
 from myapp.db import db, Entry, create_init
 
 
@@ -13,6 +16,9 @@ def create_app(test_config=None):
 
     # dbの初期化
     db.init_app(app)
+
+    # Markdownの使用
+    Markdown(app)
 
     @app.route('/')
     def hello_world():
