@@ -8,6 +8,7 @@
 ## 3. [Herokuアプリの作成](3.heroku_deploy.md)
 ## 4. [データベースの作成とアプリへの追加](4.database.md)
 ## 5. [Heroku+PostgreSQLアプリを作成する](5.heroku_again.md)
+## 6. [Markdwonに対応する](6.markdown.md)
 
 
 # 環境
