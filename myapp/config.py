@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 SECRET_KEY = os.getenv('MY_SECRET')
 local_uri = 'postgresql://{user}:{pass}@{host}/{dbname}'.format(**{
