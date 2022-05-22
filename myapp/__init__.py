@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flaskext.markdown import Markdown
+# from flaskext.markdown import Markdown
 from sqlalchemy import desc
 
 
@@ -19,7 +19,7 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # Markdownの使用
-    Markdown(app)
+    # Markdown(app)
 
     @app.route('/')
     def hello_world():
