@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
-# from flaskext.markdown import Markdown
+from flask import Flask, render_template, request, redirect, url_for, Markup
+from markdown import markdown
 from sqlalchemy import desc
 
 
@@ -18,12 +18,13 @@ def create_app(test_config=None):
     # dbの初期化
     db.init_app(app)
 
-    # Markdownの使用
-    # Markdown(app)
-
     @app.route('/')
     def hello_world():
         entries = Entry.query.order_by(desc(Entry.id)).all()
+        for entry in entries:
+            entry.body = Markup.escape(entry.body)
+            entry.body = markdown(entry.body)
+
         return render_template('index.html', entries=entries)
 
     @app.post('/post')
