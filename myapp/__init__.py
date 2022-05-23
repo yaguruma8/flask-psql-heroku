@@ -21,10 +21,6 @@ def create_app(test_config=None):
     @app.route('/')
     def hello_world():
         entries = Entry.query.order_by(desc(Entry.id)).all()
-        for entry in entries:
-            entry.body = Markup.escape(entry.body)
-            entry.body = markdown(entry.body)
-
         return render_template('index.html', entries=entries)
 
     @app.post('/post')
@@ -42,6 +38,12 @@ def create_app(test_config=None):
         return redirect(url_for('hello_world'))
 
     app.cli.add_command(create_init)
+
+    @app.template_filter('markdown')
+    def markdown_filter(str):
+        escape_str = Markup.escape(str)
+        parse_str = markdown(escape_str)
+        return parse_str
 
     return app
 

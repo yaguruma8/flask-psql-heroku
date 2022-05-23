@@ -30,7 +30,7 @@
         </div>
         <div class="card-body">
           <div class="card-text">
-            {{ entry.body | safe }}
+            {{ entry.body | markdown | safe }}
           </div>
         </div>
       </div>
